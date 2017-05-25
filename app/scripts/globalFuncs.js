@@ -72,13 +72,15 @@ globalFuncs.parityErrors = {
 };
 globalFuncs.parityErrorMsgs = {};
 globalFuncs.getParityMsg = function(str) {
-    for (var reg in this.parityErrors) {
-        var args = str.match("^" + reg + "$");
-        if (args) {
-            var key = this.parityErrors[reg];
-            if (key in this.parityErrorMsgs) {
-                args[0] = this.parityErrorMsgs[key];
-                return format.apply(this, args);
+    if (typeof(str) == 'string')
+        for (var reg in this.parityErrors) {
+            var args = str.match("^" + reg + "$");
+            if (args) {
+                var key = this.parityErrors[reg];
+                if (key in this.parityErrorMsgs) {
+                    args[0] = this.parityErrorMsgs[key];
+                    return format.apply(this, args);
+                }
             }
         }
     }
